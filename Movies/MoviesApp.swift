@@ -2,7 +2,7 @@
 //  MoviesApp.swift
 //  Movies
 //
-//  Created by Yuliya Vodneva on 18.10.24.
+//  Created by Yuliya Vodneva on 16.10.24.
 //
 
 import SwiftUI
