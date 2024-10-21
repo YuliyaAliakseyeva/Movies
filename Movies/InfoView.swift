@@ -8,21 +8,29 @@
 import SwiftUI
 
 struct InfoView: View {
+    
+    @ObservedObject var settings: SettingsManager
+    
+    var titleOn: Bool
+    
     var body: some View {
         NavigationView {
             List(Post.data) { post in
                 NavigationLink {
                     InfoDetails(post: post)
                 } label: {
-                    InfoRow(post: post)
+                    InfoRow(settings: settings, post: post)
                 }
-                
             }
-            
+            .navigationTitle("Movies")
+            .navigationBarHidden(!settings.isTitle)
         }
     }
 }
 
-#Preview {
-    InfoView()
+struct InfoView_Previews: PreviewProvider {
+    static var settings = SettingsManager()
+    static var previews: some View {
+        InfoView(settings: settings, titleOn: true)
+    }
 }

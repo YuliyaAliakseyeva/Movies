@@ -9,58 +9,83 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var sorting: String = "alphabetically"
-    let sortArray = ["alphabetically", "reverseAlphabetically", ]
+    @ObservedObject var settings: SettingsManager
     
-    @State private var darkTheme = true
+    @Environment(\.colorScheme) var colorScheme
     
-    @State private var speed = 2005.0
+    @Binding var titleOn: Bool
+    
+    //    @AppStorage("isTitle") private var isTitle = true
+    
+    //    @State private var sorting: String = "alphabetically"
+    //    let sortArray = ["alphabetically", "reverseAlphabetically", ]
+    //
+    //    @State private var darkTheme = true
+    
+//    @State private var speed = 2005.0
     @State private var isEditing = false
     
     var body: some View {
         NavigationView{
             Form {
                 Section {
-                    Toggle(isOn: $darkTheme) {
-                                Text("Dark theme")
-                            }
+                    Text(colorScheme == .dark ? "Dark Theme enabled" : "Light Theme enabled")
                 } header: {
                     Text("Common Settings")
                 }
                 Section {
-                    Picker("Sorting", selection: $sorting) {
-                        ForEach(sortArray, id: \.self) { sorting in
-                            Text(sorting).tag(sorting)
-                        }
+                    Toggle("Navigation title", isOn: $settings.isTitle)
+                    //                        .onChange(of: settings.isTitle) {
+                    //
+                    //                            settings.isTitle = titleOn
+                    //
+                    //                        }
+                    if settings.isTitle {
+                        Text("Navigation title enabled")
+                        
                     }
                 } header: {
-                    Text("Settings movies list")
+                    Text("Settings Navigation title")
                 }
                 Section {
                     Slider(
-                            value: $speed,
-                            in: 2001...2015,
-                            step: 1
-                        ) {
-                            Text("Year")
-                        } minimumValueLabel: {
-                            Text("2001")
-                        } maximumValueLabel: {
-                            Text("2015")
-                        } onEditingChanged: { editing in
-                            isEditing = editing
-                        }
-                        Text("\(Int(speed))")
-                            .foregroundColor(isEditing ? .red : .blue)
+                        value: $settings.rowHeight,
+                        in: 50...100,
+                        step: 1
+                    ) {
+                        Text("Height")
+                    } minimumValueLabel: {
+                        Text("50")
+                    } maximumValueLabel: {
+                        Text("100")
+                    } onEditingChanged: { editing in
+                        isEditing = editing
+                        
+                    }
+                    Text("Selected height: ")
+                        .foregroundColor(.secondary) + Text("\(Int(settings.rowHeight))")
+                        .foregroundColor(isEditing ? .red : .blue)
+                        
+                    if isEditing {
+                        InfoRow(settings: settings, post: Post.data[1])
+                    }
+                    
                 } header: {
-                    Text("Filter movies list")
+                    Text("Settings height InfoRow")
                 }
             }
         }
     }
 }
 
-#Preview {
-    SettingsView()
+//#Preview {
+//    SettingsView(titleOn: .constant(true))
+//}
+
+struct SettingsView_Previews: PreviewProvider {
+    static var settings = SettingsManager()
+    static var previews: some View {
+        SettingsView(settings: settings, titleOn: .constant(true))
+    }
 }
 
