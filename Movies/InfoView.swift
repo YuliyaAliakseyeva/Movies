@@ -15,11 +15,11 @@ struct InfoView: View {
     
     var body: some View {
         NavigationView {
-            List(Post.data) { post in
+            List(Movie.data) { movie in
                 NavigationLink {
-                    InfoDetails(post: post)
+                    InfoDetails(movie: movie)
                 } label: {
-                    InfoRow(settings: settings, post: post)
+                    InfoRow(settings: settings, movie: movie)
                 }
             }
             .navigationTitle("Movies")

@@ -18,7 +18,7 @@ struct ContentView: View {
         TabView {
             InfoView(settings: settings, titleOn: titleOn)
                 .tabItem { Label("Movies", systemImage: "film.stack") }
-            HelloView()
+            StatisticsView()
                 .tabItem { Label("Hello", systemImage: "hand.wave")
                 }
             SettingsView(settings: settings, titleOn: $titleOn)

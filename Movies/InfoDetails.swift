@@ -9,31 +9,31 @@ import SwiftUI
 
 struct InfoDetails: View {
     
-    var post: Post
+    var movie: Movie
     
     var body: some View {
         ScrollView {
             
-            post.image
+            movie.image
                 .resizable()
                 .scaledToFill()
                 .padding(.top, 12)
                 .shadow(radius: 12)
             
             VStack(alignment: .leading) {
-                Text(post.title)
+                Text(movie.title)
                     .font(.headline)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.red)
                 
                 Divider()
                 
-                Text(post.description)
+                Text(movie.description)
                 
             }
             .padding()
         }
-        .navigationTitle(post.title)
+        .navigationTitle(movie.title)
         .background(Color(.lightGray))
     }
     
@@ -41,5 +41,5 @@ struct InfoDetails: View {
 
 
 #Preview {
-    InfoDetails(post: Post.data[1])
+    InfoDetails(movie: Movie.data[1])
 }
