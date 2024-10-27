@@ -11,18 +11,18 @@ struct InfoRow: View {
     
     @ObservedObject var settings: SettingsManager
     
-    var post: Post
+    var movie: Movie
     
     var body: some View {
         HStack {
-            post.image
+            movie.image
                 .resizable()
                 .scaledToFill()
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 .frame(width: 60, height: settings.rowHeight)
                 .padding(.leading, 12)
             
-            Text(post.title)
+            Text(movie.title)
             
             Spacer()
         }
@@ -32,6 +32,6 @@ struct InfoRow: View {
 struct InfoRow_Previews: PreviewProvider {
     static var settings = SettingsManager()
     static var previews: some View {
-        InfoRow(settings: settings, post: Post.data[1])
+        InfoRow(settings: settings, movie: Movie.data[1])
     }
 }

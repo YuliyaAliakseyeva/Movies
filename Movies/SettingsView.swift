@@ -67,7 +67,7 @@ struct SettingsView: View {
                         .foregroundColor(isEditing ? .red : .blue)
                         
                     if isEditing {
-                        InfoRow(settings: settings, post: Post.data[1])
+                        InfoRow(settings: settings, movie: Movie.data[1])
                     }
                     
                 } header: {
